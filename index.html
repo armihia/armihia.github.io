@@ -18,11 +18,12 @@
 <link href="css/animate.css" rel="stylesheet" type="text/css">
 <link href="css/jpushmenu.css" rel="stylesheet" type="text/css">
 <style>
-  /* 移动端布局 */
-  @media (max-width: 768px) {
+  /* 移动端布局（包含 iPad 横竖屏） */
+  @media (max-width: 1024px) {
     table {
       display: block;
       width: 100% !important;
+      table-layout: auto !important; /* 避免固定列宽压缩图片 */
     }
     table tr {
       display: block;
@@ -34,10 +35,11 @@
     }
     table img {
       width: 100% !important;
-      height: auto !important;
-      min-width: 250px; /* 长条形图在手机上保持最小宽度 */
+      height: auto !important;   /* 保持纵横比 */
+      min-width: 280px;          /* 避免长条形太窄，你可调整为 300 或更大 */
       display: block;
       margin: 0 auto 10px auto;
+      object-fit: contain;       /* 额外保险，避免变形 */
     }
     table p {
       text-align: justify;
