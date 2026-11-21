@@ -1,7 +1,7 @@
 import { contentUrl, emailUrl, importedItems, introductionBody, itemsWithTitle, newEntries, readJson } from "./content.js";
 import { featuredPhotos, photosWithImages, photoTile } from "./photos.js";
 import { groupPublications, publicationDate } from "./publications.js";
-import { applySiteCopy, copyParts, formatCopy, siteCopy } from "./site-copy.js";
+import { applySiteCopy, copyParts, formatCopy, siteCopy } from "./site-copy.js?v=news-carousel";
 
 const byId = (id) => document.getElementById(id);
 
@@ -337,19 +337,49 @@ function news(item) {
 
 function renderNews(articles, labels) {
   showSection("interview", articles.length > 0);
+  const carousel = byId("news-carousel");
   const track = byId("news-list");
-  const controls = byId("news-navigation");
+  const controls = byId("news-controls");
+  const previous = byId("news-previous");
+  const next = byId("news-next");
+  const playback = byId("news-playback");
   const slides = articles.map(news);
   track.replaceChildren(...slides);
-  controls.hidden = slides.length <= 1;
-  track.tabIndex = slides.length > 1 ? 0 : -1;
-  if (slides.length <= 1) return;
+  const multiple = slides.length > 1;
+  for (const control of [controls, previous, next]) control.hidden = !multiple;
+  track.tabIndex = multiple ? 0 : -1;
+  if (!multiple) return;
+  track.dataset.draggable = "";
 
-  let current = -1;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const canHover = matchMedia("(any-hover: hover)");
+  let current = -1;
+  let target = null;
+  let playing = !reducedMotion.matches;
+  let inView = false;
+  let autoplayTimer;
+  let drag = null;
+  let suppressClick = false;
+
+  function scheduleAutoplay() {
+    clearTimeout(autoplayTimer);
+    const focused = carousel.querySelector(":focus-visible");
+    if (!playing || !inView || document.hidden || drag || (focused && focused !== playback)) return;
+    if (canHover.matches && carousel.matches(":hover")) return;
+    autoplayTimer = setTimeout(() => step(1), 5000);
+  }
+
   function goTo(index) {
-    const position = Math.max(0, Math.min(index, slides.length - 1));
-    track.scrollTo({ left: position * track.clientWidth, behavior: reducedMotion.matches ? "auto" : "smooth" });
+    const position = (index + slides.length) % slides.length;
+    target = position;
+    const behavior = reducedMotion.matches || index !== position ? "instant" : "smooth";
+    track.scrollTo({ left: position * track.clientWidth, behavior });
+    updateCurrent();
+    scheduleAutoplay();
+  }
+
+  function step(offset) {
+    goTo((target ?? current) + offset);
   }
 
   const dots = articles.map((item, index) => {
@@ -360,11 +390,13 @@ function renderNews(articles, labels) {
     dot.addEventListener("click", () => goTo(index));
     return dot;
   });
-  controls.replaceChildren(...dots);
+  byId("news-navigation").replaceChildren(...dots);
 
   function updateCurrent() {
     if (!track.clientWidth) return;
-    const index = Math.round(track.scrollLeft / track.clientWidth);
+    const position = track.scrollLeft / track.clientWidth;
+    if (target !== null && Math.abs(position - target) < .01) target = null;
+    const index = Math.max(0, Math.min(Math.round(position), slides.length - 1));
     if (index === current) return;
     current = index;
     slides.forEach((slide, position) => {
@@ -372,13 +404,95 @@ function renderNews(articles, labels) {
       dots[position].setAttribute("aria-pressed", String(position === current));
     });
   }
+
+  function updatePlayback() {
+    const label = playing ? labels.pausePlayback : labels.startPlayback;
+    playback.dataset.playing = String(playing);
+    playback.setAttribute("aria-label", label);
+    playback.title = label;
+    scheduleAutoplay();
+  }
+
   updateCurrent();
-  track.addEventListener("scroll", updateCurrent, { passive: true });
+  updatePlayback();
+  previous.addEventListener("click", () => step(-1));
+  next.addEventListener("click", () => step(1));
+  playback.addEventListener("click", () => {
+    playing = !playing;
+    updatePlayback();
+  });
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches) playing = false;
+    updatePlayback();
+  });
+  const observer = new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    scheduleAutoplay();
+  });
+  observer.observe(track);
+  document.addEventListener("visibilitychange", scheduleAutoplay);
+  carousel.addEventListener("pointerenter", scheduleAutoplay);
+  carousel.addEventListener("pointerleave", scheduleAutoplay);
+  carousel.addEventListener("focusin", () => requestAnimationFrame(scheduleAutoplay));
+  carousel.addEventListener("focusout", () => requestAnimationFrame(scheduleAutoplay));
+
+  track.addEventListener("scroll", () => {
+    updateCurrent();
+    scheduleAutoplay();
+  }, { passive: true });
+  track.addEventListener("wheel", () => { target = null; }, { passive: true });
   track.addEventListener("keydown", (event) => {
     if (event.target !== track || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
     event.preventDefault();
-    goTo(current + (event.key === "ArrowLeft" ? -1 : 1));
+    step(event.key === "ArrowLeft" ? -1 : 1);
   });
+
+  track.addEventListener("pointerdown", (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    target = null;
+    suppressClick = false;
+    drag = { id: event.pointerId, x: event.clientX, moved: false };
+    scheduleAutoplay();
+  });
+  track.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse" || drag?.id !== event.pointerId) return;
+    const distance = drag.x - event.clientX;
+    if (!drag.moved) {
+      if (Math.abs(distance) < 6) return;
+      drag.left = track.scrollLeft;
+      drag.index = current;
+      drag.moved = true;
+      track.classList.add("is-dragging");
+      track.setPointerCapture(event.pointerId);
+    }
+    event.preventDefault();
+    track.scrollLeft = drag.left + distance;
+  });
+
+  function endDrag(event) {
+    if (drag?.id !== event.pointerId) return;
+    const gesture = drag;
+    drag = null;
+    if (!gesture.moved) {
+      scheduleAutoplay();
+      return;
+    }
+    track.classList.remove("is-dragging");
+    suppressClick = true;
+    const distance = gesture.x - event.clientX;
+    const threshold = Math.min(55, track.clientWidth * .18);
+    const movedPage = event.type === "pointerup" && Math.abs(distance) >= threshold;
+    goTo(gesture.index + (movedPage ? Math.sign(distance) : 0));
+  }
+
+  window.addEventListener("pointerup", endDrag);
+  window.addEventListener("pointercancel", endDrag);
+  track.addEventListener("lostpointercapture", endDrag);
+  track.addEventListener("dragstart", (event) => event.preventDefault());
+  track.addEventListener("click", (event) => {
+    if (suppressClick && event.detail > 0) event.preventDefault();
+    suppressClick = false;
+  }, true);
 }
 
 function project(item) {

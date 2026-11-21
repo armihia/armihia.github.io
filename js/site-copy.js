@@ -41,6 +41,10 @@ const defaults = {
     slides: "News slides",
     navigation: "Select a news item",
     showSlide: "Show {title}",
+    previousSlide: "Previous news item",
+    nextSlide: "Next news item",
+    pausePlayback: "Pause autoplay",
+    startPlayback: "Start autoplay",
   },
   publications: {
     heading: "Research Publications",

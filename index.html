@@ -8,8 +8,8 @@
   <link rel="icon" href="images/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/jpushmenu.css">
-  <link rel="stylesheet" href="css/home.css?v=portrait-placeholder">
-  <script type="module" src="js/home.js?v=portrait-placeholder"></script>
+  <link rel="stylesheet" href="css/home.css?v=news-carousel">
+  <script type="module" src="js/home.js?v=news-carousel"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-copy="site.skipToContent">Skip to content</a>
@@ -98,9 +98,16 @@
     <section id="interview" class="page-section career" aria-labelledby="news-title" hidden>
       <div class="wrap">
         <div class="heading"><h2 id="news-title" data-copy="news.heading">News</h2></div>
-        <div class="news-carousel" role="region" aria-roledescription="carousel" aria-labelledby="news-title" data-copy-role="news.carousel">
-          <ul id="news-list" class="news-list" tabindex="0" aria-label="News slides" data-copy-label="news.slides"></ul>
-          <div id="news-navigation" class="news-navigation" role="group" aria-label="Select a news item" data-copy-label="news.navigation" hidden></div>
+        <div id="news-carousel" class="news-carousel" role="region" aria-roledescription="carousel" aria-labelledby="news-title" data-copy-role="news.carousel">
+          <div class="news-stage">
+            <ul id="news-list" class="news-list" tabindex="0" aria-label="News slides" data-copy-label="news.slides"></ul>
+            <button id="news-previous" class="news-arrow news-arrow-previous" type="button" aria-label="Previous news item" aria-controls="news-list" data-copy-label="news.previousSlide" hidden></button>
+            <button id="news-next" class="news-arrow news-arrow-next" type="button" aria-label="Next news item" aria-controls="news-list" data-copy-label="news.nextSlide" hidden></button>
+          </div>
+          <div id="news-controls" class="news-controls" hidden>
+            <button id="news-playback" class="news-playback" type="button" aria-label="Pause autoplay" aria-controls="news-list"></button>
+            <div id="news-navigation" class="news-navigation" role="group" aria-label="Select a news item" data-copy-label="news.navigation"></div>
+          </div>
         </div>
       </div>
     </section>
