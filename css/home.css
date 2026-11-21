@@ -211,6 +211,7 @@ p { font: inherit; }
 .research { max-width: 49rem; margin-inline: auto; }
 .research p + p { margin-top: .9rem; }
 #affiliation { font-size: 1.1rem; font-weight: 600; }
+.affiliation-suffix { font-weight: 400; }
 #affiliation:not([hidden]) + .research-body { margin-top: .85rem; }
 .research-body p, .paper-summary p, .news-summary { white-space: pre-line; }
 .research-reading { margin-top: 1.15rem; }

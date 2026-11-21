@@ -18,6 +18,45 @@ function link(label, href) {
   return el;
 }
 
+function markdownNodes(tokens) {
+  const fragment = document.createDocumentFragment();
+  for (const token of tokens) {
+    switch (token.type) {
+      case "strong":
+      case "em":
+      case "del": {
+        const styled = element(token.type);
+        styled.append(markdownNodes(token.tokens));
+        fragment.append(styled);
+        break;
+      }
+      case "link": {
+        const url = contentUrl(token.href);
+        if (url) {
+          const anchor = link("", url);
+          if (token.title) anchor.title = token.title;
+          anchor.append(markdownNodes(token.tokens));
+          fragment.append(anchor);
+        } else fragment.append(token.raw);
+        break;
+      }
+      case "codespan":
+        fragment.append(element("code", "", token.text));
+        break;
+      case "br":
+        fragment.append(element("br"));
+        break;
+      case "text":
+      case "escape":
+        fragment.append(token.text);
+        break;
+      default:
+        fragment.append(token.raw);
+    }
+  }
+  return fragment;
+}
+
 function textAt(id, value) {
   const node = byId(id);
   node.textContent = value || "";
@@ -149,14 +188,13 @@ function renderResearch(research, profile, labels) {
   const suffix = typeof research.affiliationSuffix === "string" ? research.affiliationSuffix.trim() : "";
   if (suffix) {
     if (affiliation.textContent.trim()) affiliation.append(" ");
-    let end = 0;
-    for (const match of suffix.matchAll(/\[([^\]\r\n]+)\]\(((?:[^\s()]|\([^\s()]*\))+)\)/g)) {
-      const url = contentUrl(match[2]);
-      if (!url) continue;
-      affiliation.append(suffix.slice(end, match.index), link(match[1], url));
-      end = match.index + match[0].length;
-    }
-    affiliation.append(suffix.slice(end));
+    const extra = element("span", "affiliation-suffix", suffix);
+    extra.hidden = true;
+    affiliation.append(extra);
+    import("./vendor/marked.esm.js")
+      .then(({ Lexer }) => extra.replaceChildren(markdownNodes(Lexer.lexInline(suffix))))
+      .catch((error) => console.error(error))
+      .finally(() => { extra.hidden = false; });
   }
   affiliation.hidden = research.showAffiliation === false || !affiliation.textContent.trim();
   const paragraphs = introductionBody(research).split(/\r?\n[\t ]*\r?\n/).map((paragraph) => paragraph.trim()).filter(Boolean);
