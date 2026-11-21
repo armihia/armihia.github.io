@@ -1,18 +1,18 @@
 {
   "profile": {
     "name": "Hanzhong Zhang",
-    "field": "Human–Computer Interaction & Artificial Intelligence",
-    "role": "PhD researcher",
+    "field": "Human–Agent Interaction & Artificial Psychology",
+    "role": "PhD student",
     "institution": "University of Exeter",
     "institutionUrl": "https://www.exeter.ac.uk/",
     "supervisor": "Dr Siyang Song",
-    "supervisorUrl": "",
+    "supervisorUrl": "https://scholar.google.com/citations?user=ZKSL1IcAAAAJ",
     "location": "Exeter, United Kingdom",
     "email": "armihia@foxmail.com",
-    "image": "images/alex.jpg",
-    "imageAlt": "Hanzhong Zhang leaning over a balcony in sunlight",
-    "secondaryImage": "images/thumbs/interview-portrait.webp",
-    "secondaryImageAlt": "Hanzhong Zhang in a red coat beside a white railing",
+    "image": "images/uploads/74e0b3d6-35ee-4bdb-aa1a-c61fa6f92cbf.png",
+    "imageAlt": "Yes, this is totally the real me.",
+    "secondaryImage": "images/uploads/6b8486bc-f2d8-4676-ad79-e093cf871e8f.png",
+    "secondaryImageAlt": "\"Okay, okay—you caught me!",
     "defaultPortrait": "primary"
   },
   "links": [
@@ -42,8 +42,11 @@
         "note": "A sandbox for social experience"
       }
     ],
-    "image": "images/thumbs/interview-portrait.webp",
-    "imageAlt": "Hanzhong Zhang in a red coat beside a white railing"
+    "image": "images/uploads/5111d4ae-d9fd-49af-a63c-372ec75951c7.png",
+    "imageAlt": "From reacting on command to having a mind of its own—even knowing when to stay silent!",
+    "heading": "A Little About Me",
+    "linksTitle": "Things I've been up to",
+    "body": "I’m working toward an artificial general intelligence (AGI) agent grounded in human cognition, consciousness, and lived experience from simulated worlds. Ultimately, I hope to create a companion AI with real subjectivity, someone with a mind of her own (yes, think of an AI anime companion who actually thinks for herself).\n\nCentered on my work on the Intentional Agent (named after intentionality in phenomenology), my research explores how an agent’s inner thoughts and evolving internal states can connect with memory mechanisms like PersMem. Using simulated sandboxes such as CMASE, I test how ongoing social experience shapes what an agent remembers, how it interprets the world, and how it chooses to act.\n\nMy models and experiments are deeply inspired by psychology, phenomenology, and sociology."
   },
   "publications": [
     {
@@ -128,21 +131,21 @@
       "date": "2025-06-18",
       "image": "https://media.springernature.com/m312/springer-static/image/art:10.1007%2Fs10111-025-00810-z/MediaObjects/10111_2025_810_Fig1_HTML.png",
       "figureAlt": "Figure 1 from The Tribal Theater Model.",
-      "placement": "published"
+      "placement": "other"
     },
     {
       "title": "Computational Multi-Agents Society Experiments: Social Modeling Framework Based on Generative Agents",
       "authors": "Hanzhong Zhang, Muhua Huang, Jindong Wang",
       "year": 2026,
-      "venue": "ACM Transactions on Social Computing (accepted)",
-      "url": "https://arxiv.org/abs/2508.17366",
+      "venue": "ACM Transactions on Social Computing",
+      "url": "https://dl.acm.org/doi/abs/10.1145/3860291",
       "summary": "CMASE lets researchers join a simulated society as observers, interviewers or participants. Its experiments revisit studies of urban greenery and public-goods cooperation to examine how social interventions unfold inside the simulation.",
       "image": "images/thumbs/cmase.webp",
       "aliases": [
         "Evolving Collective Cognition in Human–Agent Hybrid Societies: How Agents Form Stances and Boundaries"
       ],
-      "status": "other",
-      "placement": "other"
+      "status": "published",
+      "placement": "published"
     },
     {
       "title": "VCounselor: A Psychological Intervention Chat Agent Based on a Knowledge-Enhanced Large Language Model",
@@ -311,5 +314,71 @@
     "bilibiliUid": "",
     "hiddenPublications": [],
     "hiddenVideos": []
+  },
+  "ui": {
+    "site": {
+      "documentTitle": "{name} — Welcome to My Corner",
+      "description": "Hi, I'm {name}, a PhD researcher at the University of Exeter exploring generative agents, simulated experience, and computational models of cognition and consciousness.",
+      "skipToContent": "Jump straight to the good stuff",
+      "switchPortrait": "Swap my photo",
+      "editSite": "Tweak site",
+      "loadError": "Oops, the latest updates are playing hide-and-seek. Hit refresh to try again!",
+      "email": "Email me"
+    },
+    "navigation": {
+      "about": "About",
+      "news": "What's New",
+      "publications": "Papers",
+      "experience": "Journey",
+      "photos": "Snapshots",
+      "contact": "Say Hi"
+    },
+    "about": {
+      "roleAtInstitution": "{role} over at the {institution}",
+      "affiliationWithSupervisor": "{position}, working with {supervisor}."
+    },
+    "news": {
+      "heading": "What's New",
+      "navigation": "Pick a story"
+    },
+    "publications": {
+      "heading": "Papers & Thoughts",
+      "latestPreprints": "Fresh Preprints",
+      "latestPublications": "Recent Papers",
+      "otherPublications": "From the Archive",
+      "summary": "TL;DR",
+      "pdf": "Read PDF",
+      "openFigure": "Zoom in"
+    },
+    "experience": {
+      "heading": "The Journey So Far",
+      "interests": "What Keeps Me Curious",
+      "programming": "Tools & Code",
+      "honours": "Milestones & Honours"
+    },
+    "projects": {
+      "heading": "Things I've Built & Filmed",
+      "all": "Everything",
+      "moreVideos": "Watch more videos"
+    },
+    "photography": {
+      "heading": "Through My Lens",
+      "viewAll": "Curious about my roommates? Click here to see more!",
+      "backToHomepage": "Take me back home",
+      "description": "Little moments captured by {name}.",
+      "empty": "Nothing developed in the darkroom yet—check back soon!",
+      "loadError": "The photos didn't make it through. Mind giving it another try?"
+    },
+    "contact": {
+      "heading": "Let's Chat",
+      "link": "Drop me a line"
+    },
+    "interview": {
+      "credit": "Originally featured in MIT Technology Review (China) https://www.mittrchina.com/",
+      "originalLink": "Read the original piece:"
+    },
+    "paperViewer": {
+      "openPdf": "Dive into the ITCMA-S PDF"
+    }
   }
 }
