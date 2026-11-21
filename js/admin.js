@@ -51,9 +51,10 @@ const sections = [
   },
   {
     label: "个人介绍（About Me）", key: "research",
-    hint: "正文用空行分段。学校和导师来自个人资料，也可以关闭自动显示后把它们写进正文。",
+    hint: "正文用空行分段。学校和导师来自个人资料。补充文字接在同一段，链接可写成 [链接文字](https://网址)。",
     fields: [["heading", "介绍标题", "text", false, "About Me"],
       ["showAffiliation", "显示学校和导师", "checkbox", false, true],
+      ["affiliationSuffix", "学校和导师后的补充文字"],
       ["body", "介绍正文", "long", false, introductionBody],
       ["image", "介绍区图片", "image"], ["imageAlt", "介绍区图片描述"],
       ["linksTitle", "相关论文链接标题", "text", false, "Related work"]],

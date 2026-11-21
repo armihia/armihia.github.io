@@ -87,13 +87,21 @@ function renderPortrait(profile) {
   if (!photos.length) return;
 
   const photo = portrait.querySelector("img");
+  const description = byId("portrait-description");
   const canSwitch = photos.length === 2 && photos[0].url !== photos[1].url;
   let index = canSwitch && profile.defaultPortrait === "secondary" ? 1 : 0;
 
   function showPhoto() {
     const { url, alt } = photos[index];
+    const text = typeof alt === "string" ? alt.trim() : "";
     photo.src = url;
-    photo.alt = alt || profile.name;
+    photo.alt = text || profile.name;
+    if (description) {
+      description.textContent = text;
+      description.hidden = !text;
+      if (text) photo.tabIndex = 0;
+      else photo.removeAttribute("tabindex");
+    }
   }
   showPhoto();
 
@@ -138,6 +146,18 @@ function renderProfile(profile, links, labels) {
 
 function renderResearch(research, profile, labels) {
   const affiliation = byId("affiliation");
+  const suffix = typeof research.affiliationSuffix === "string" ? research.affiliationSuffix.trim() : "";
+  if (suffix) {
+    if (affiliation.textContent.trim()) affiliation.append(" ");
+    let end = 0;
+    for (const match of suffix.matchAll(/\[([^\]\r\n]+)\]\(((?:[^\s()]|\([^\s()]*\))+)\)/g)) {
+      const url = contentUrl(match[2]);
+      if (!url) continue;
+      affiliation.append(suffix.slice(end, match.index), link(match[1], url));
+      end = match.index + match[0].length;
+    }
+    affiliation.append(suffix.slice(end));
+  }
   affiliation.hidden = research.showAffiliation === false || !affiliation.textContent.trim();
   const paragraphs = introductionBody(research).split(/\r?\n[\t ]*\r?\n/).map((paragraph) => paragraph.trim()).filter(Boolean);
   const body = byId("research-body");
