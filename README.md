@@ -17,6 +17,22 @@
 
 由后台上传且内容里已无引用的文件会在发布时从当前分支删除，提交历史仍可追溯。
 
+## 批量编辑界面文案
+
+在后台展开 **界面文案 JSON**，点 **下载当前文案 JSON** 获取完整模板。修改引号内的值，再用 **上传文案 JSON** 载入草稿，确认后点 **发布修改**。也可以只上传要更新的字段。遇到字段名或格式错误时，后台会显示原因。
+
+下面三项分别控制首页与摄影页的摄影标题、首页摄影入口的文字，以及首页底部引语。引语可用空字符串隐藏。模板里已有的 `{name}`、`{title}` 等占位符会在网页上显示相应的姓名或标题。
+
+```json
+{
+  "photography": {
+    "heading": "Photography",
+    "viewAll": "View all photographs",
+    "quote": "Although it may not be real life now, real life will come one day."
+  }
+}
+```
+
 ## 内容 API
 
 | 操作 | 路径 |
@@ -38,7 +54,7 @@
 
 保留无关字段以及当前文件的 `sha`。如果 GitHub 返回冲突，重新读取并合并需要修改的字段。后台使用 GitHub 的 `createCommitOnBranch` 将上传的文件、删除操作和 JSON 写入同一个提交。 [GitHub GraphQL API](https://docs.github.com/en/graphql/reference/commits#createcommitonbranch)
 
-论文的 `placement` 为 `published`、`preprint` 或 `other`，公开 PDF 地址写入 `pdf`。个人介绍可使用 `research.body` 和 `research.image`。既有的 `goal`、`approach` 和 `influences` 仍可作为介绍正文的来源。两张首页头像分别由 `profile.image` 和 `profile.secondaryImage` 设置，`profile.defaultPortrait` 可填写 `primary` 或 `secondary`。
+论文的 `placement` 为 `published`、`preprint` 或 `other`，公开 PDF 地址写入 `pdf`。个人介绍可使用 `research.body` 和 `research.image`。既有的 `goal`、`approach` 和 `influences` 仍可作为介绍正文的来源。两张首页头像分别由 `profile.image` 和 `profile.secondaryImage` 设置，`profile.defaultPortrait` 可填写 `primary` 或 `secondary`。公开页面的文案覆写保存在 `ui`。个人介绍标题、相关论文标题及引语分别保存在 `research.heading`、`research.linksTitle` 和 `personal.quote`，与后台对应表单共用。
 
 ## 自动同步论文和视频
 

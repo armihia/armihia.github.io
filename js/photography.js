@@ -1,22 +1,24 @@
 import { readJson } from "./content.js";
 import { photosWithImages, photoTile } from "./photos.js";
+import { applySiteCopy, siteCopy } from "./site-copy.js";
 
 const status = document.getElementById("gallery-status");
+let copy = siteCopy();
 try {
   const data = await readJson("../api/content.json");
-  const name = data.profile?.name;
-  if (name) {
-    document.title = `Photography - ${name}`;
-    document.getElementById("photographer-name").textContent = name;
-  }
+  copy = siteCopy(data);
+  const photographer = document.getElementById("photographer-name");
+  const name = data.profile?.name || photographer.textContent;
+  photographer.textContent = name;
+  applySiteCopy(copy, { name, heading: copy.photography.heading });
   const photos = photosWithImages(data.photos);
-  document.getElementById("gallery-list").replaceChildren(...photos.map((item) => photoTile(item, "../")));
+  document.getElementById("gallery-list").replaceChildren(...photos.map((item) => photoTile(item, "../", copy.photography.photoAlt)));
   if (!photos.length) {
-    status.textContent = "No photographs yet.";
+    status.textContent = copy.photography.empty;
     status.hidden = false;
   }
 } catch (error) {
   console.error(error);
-  status.textContent = "The photographs could not be loaded. Please try again.";
+  status.textContent = copy.photography.loadError;
   status.hidden = false;
 }

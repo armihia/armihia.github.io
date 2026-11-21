@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Great Vibes";
+  src: url("../fonts/great-vibes.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --page: #fff;
@@ -345,7 +353,14 @@ figcaption { margin-top: .35rem; color: var(--muted); font-size: .9rem; }
 .photography-list li { break-inside: avoid; margin-bottom: 1.25rem; }
 .gallery-footer { padding-bottom: 1.5rem; }
 #project-quote { margin: 2.75rem 0 0; text-align: center; }
-#project-quote blockquote { font-size: clamp(1.15rem, 2.5vw, 1.55rem); }
+#project-quote blockquote {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: .3em;
+  white-space: pre-line;
+  text-wrap: balance;
+  font: italic 400 clamp(1.95rem, 4.3vw, 3rem)/1.25 "Great Vibes", "Apple Chancery", Georgia, serif;
+}
 .work .title .getin { margin-top: 1rem; }
 
 #contactme {

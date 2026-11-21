@@ -11,12 +11,12 @@ export function featuredPhotos(photos) {
   return selected.slice(0, 3);
 }
 
-export function photoTile(item, prefix = "") {
+export function photoTile(item, prefix = "", fallbackAlt = "Photograph") {
   const url = contentUrl(item.image);
   const source = url.startsWith("https://") ? url : prefix + url;
   const img = document.createElement("img");
   img.src = source;
-  img.alt = item.alt || item.caption || "Photograph";
+  img.alt = item.alt || item.caption || fallbackAlt;
   img.loading = "lazy";
   img.decoding = "async";
   img.referrerPolicy = "no-referrer";

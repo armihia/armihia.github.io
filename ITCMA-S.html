@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ITCMA-S</title>
+  <title data-copy="paperViewer.title">ITCMA-S</title>
   <link rel="stylesheet" href="css/home.css">
+  <script type="module" src="js/content-page.js"></script>
   <style>
     .pdf-link { padding-block: .75rem; }
     iframe { display: block; width: 100%; height: calc(100dvh - 3.2rem); border: 0; }
   </style>
 </head>
 <body>
-  <p class="wrap pdf-link"><a href="ITCMA-S.pdf">Open the ITCMA-S PDF</a></p>
-  <iframe src="ITCMA-S.pdf" title="ITCMA-S paper"></iframe>
+  <p class="wrap pdf-link"><a href="ITCMA-S.pdf" data-copy="paperViewer.openPdf">Open the ITCMA-S PDF</a></p>
+  <iframe src="ITCMA-S.pdf" title="ITCMA-S paper" data-copy-title="paperViewer.pdfTitle"></iframe>
 </body>
 </html>

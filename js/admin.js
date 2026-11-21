@@ -1,6 +1,7 @@
 import { contentUrl, emailUrl, importedItems, introductionBody, itemsWithTitle, newEntries } from "./content.js";
 import { featuredPhotos, photosWithImages } from "./photos.js";
 import { groupPublications, publicationsPerGroup } from "./publications.js";
+import { contentCopyFields, importSiteCopy, siteCopy } from "./site-copy.js";
 
 const repo = "armihia/armihia.github.io";
 const branch = "main";
@@ -216,6 +217,7 @@ function control(record, [key, title, type = "text", required = false, fallback]
   const checkbox = type === "checkbox";
   const options = selectOptions[type];
   const input = element(options ? "select" : multiline ? "textarea" : "input");
+  input.dataset.contentField = key;
   if (options) {
     input.setAttribute("aria-label", title);
     input.append(...options.map(([value, name]) => new Option(name, value)));
@@ -368,13 +370,14 @@ function syncedPublications(appendEntry) {
 }
 
 function showEditor() {
-  fields.replaceChildren(...sections.map((definition) => {
+  fields.replaceChildren(siteCopyEditor(), ...sections.map((definition) => {
     const { label, key, open, hint, item, fields: definitions } = definition;
     const [outer, inner] = key.split(".");
     const parent = inner ? (draft[outer] ??= {}) : draft;
     const recordKey = inner || outer;
     const value = parent[recordKey] ??= (item ? [] : {});
     const section = element("details", "editor-section");
+    section.dataset.contentSection = key;
     section.open = Boolean(open);
     section.append(element("summary", "", label));
     if (hint) section.append(element("p", "editor-hint", hint));
@@ -391,6 +394,58 @@ function showEditor() {
     return section;
   }));
   updatePublicationCounts();
+}
+
+function siteCopyEditor() {
+  const section = element("details", "editor-section");
+  const controls = element("div", "editor-copy-controls");
+  const upload = element("div", "editor-control");
+  const label = element("label", "", "上传文案 JSON");
+  const input = element("input");
+  const message = element("p", "editor-status");
+  message.setAttribute("role", "status");
+  input.type = "file";
+  input.accept = ".json,application/json";
+  label.append(input);
+  upload.append(label);
+  const template = action("下载当前文案 JSON", () => {
+    downloadJson("site-copy.json", JSON.stringify(siteCopy(draft), null, 2) + "\n");
+  });
+  controls.append(template, upload);
+  section.append(
+    element("summary", "", "界面文案 JSON"),
+    element("p", "editor-hint", "下载当前文案，修改引号里的值，再上传。可以只上传要改的字段，最后点「发布修改」。"),
+    controls,
+    message,
+  );
+
+  input.addEventListener("change", async () => {
+    const file = input.files[0];
+    input.value = "";
+    if (!file) return;
+    fields.disabled = true;
+    $("save").disabled = true;
+    try {
+      const changed = importSiteCopy(draft, JSON.parse(await file.text()));
+      for (const path of changed) {
+        const field = contentCopyFields[path];
+        if (!field) continue;
+        const [sectionKey, key] = field;
+        const control = fields.querySelector(`[data-content-section="${sectionKey}"] [data-content-field="${key}"]`);
+        control.value = draft[sectionKey][key];
+      }
+      if (changed.length) setDirty();
+      status(message, changed.length
+        ? `已将 ${changed.length} 项文案载入草稿。点击「发布修改」上线。`
+        : "文件里的文案与当前草稿一致。");
+    } catch (error) {
+      status(message, error instanceof SyntaxError ? "JSON 格式有误。请检查引号、逗号和括号。" : error.message, true);
+    } finally {
+      fields.disabled = false;
+      $("save").disabled = !dirty;
+    }
+  });
+  return section;
 }
 
 async function request(endpoint, token, body) {
@@ -578,14 +633,16 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-$("download").addEventListener("click", () => {
-  const url = URL.createObjectURL(new Blob([serialize()], { type: "application/json" }));
+function downloadJson(filename, json) {
+  const url = URL.createObjectURL(new Blob([json], { type: "application/json" }));
   const link = element("a");
   link.href = url;
-  link.download = "homepage-content.json";
+  link.download = filename;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
+}
+
+$("download").addEventListener("click", () => downloadJson("homepage-content.json", serialize()));
 
 window.addEventListener("beforeunload", (event) => {
   if (dirty) event.preventDefault();

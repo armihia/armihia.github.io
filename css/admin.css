@@ -26,6 +26,8 @@
 .editor-section > summary { font-size: 1.05rem; font-weight: 650; }
 .editor-section[open] > summary { margin-bottom: .85rem; }
 .editor-hint { margin: .45rem 0; font-size: .88rem; }
+.editor-copy-controls { display: flex; flex-wrap: wrap; align-items: end; gap: .65rem .9rem; margin-block: .65rem .35rem; }
+.editor-copy-controls .editor-control { flex: 1 1 16rem; }
 .editor-fields-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem 1rem; }
 .editor-fields-group + .editor-fields-group { margin-top: 1rem; }
 .editor-list { display: grid; gap: .5rem; margin-bottom: .55rem; }
