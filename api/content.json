@@ -12,7 +12,7 @@
     "image": "images/uploads/74e0b3d6-35ee-4bdb-aa1a-c61fa6f92cbf.png",
     "imageAlt": "Yes, this is totally the real me.",
     "secondaryImage": "images/uploads/6b8486bc-f2d8-4676-ad79-e093cf871e8f.png",
-    "secondaryImageAlt": "\"Okay, okay—you caught me!",
+    "secondaryImageAlt": "Okay, okay—you caught me!",
     "defaultPortrait": "primary"
   },
   "links": [
@@ -44,7 +44,7 @@
     ],
     "image": "images/uploads/5111d4ae-d9fd-49af-a63c-372ec75951c7.png",
     "imageAlt": "From reacting on command to having a mind of its own—even knowing when to stay silent!",
-    "heading": "A Little About Me",
+    "heading": "About Me",
     "linksTitle": "Things I've been up to",
     "body": "I’m working toward an artificial general intelligence (AGI) agent grounded in human cognition, consciousness, and lived experience from simulated worlds. Ultimately, I hope to create a companion AI with real subjectivity, someone with a mind of her own (yes, think of an AI anime companion who actually thinks for herself).\n\nCentered on my work on the Intentional Agent (named after intentionality in phenomenology), my research explores how an agent’s inner thoughts and evolving internal states can connect with memory mechanisms like PersMem. Using simulated sandboxes such as CMASE, I test how ongoing social experience shapes what an agent remembers, how it interprets the world, and how it chooses to act.\n\nMy models and experiments are deeply inspired by psychology, phenomenology, and sociology."
   },
@@ -363,7 +363,7 @@
     },
     "photography": {
       "heading": "Through My Lens",
-      "viewAll": "Curious about my roommates? Click here to see more!",
+      "viewAll": "Interested in my photography? Click here to see more!",
       "backToHomepage": "Take me back home",
       "description": "Little moments captured by {name}.",
       "empty": "Nothing developed in the darkroom yet—check back soon!",
