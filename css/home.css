@@ -89,22 +89,42 @@ p { font: inherit; }
 #site-menu a:focus-visible, #site-menu button:focus-visible { outline-offset: -4px; }
 
 #home {
+  /* The halo center is at 49.47%, 41.31% in bg-mia.jpg. */
+  --hero-halo-x: .4947;
+  --portrait-size: clamp(9rem, 17vw, 12.5rem);
   display: grid;
-  align-items: end;
+  container-type: inline-size;
+  grid-template-rows: minmax(0, 41.31fr) minmax(0, 58.69fr);
   min-height: 94vh;
   min-height: 94svh;
-  padding-block: 5rem clamp(2.5rem, 8vh, 5rem);
   text-align: center;
   color: #fff;
   background-color: #3c4c57;
   background-attachment: scroll;
+  background-position: calc(var(--hero-halo-x) * 100%) 41.31%;
 }
-#home .info { margin-block: 0; }
-#home .info_detail { margin: 0; }
-.profile-portrait { display: inline-block; position: relative; vertical-align: middle; }
+#home .info {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  margin-block: 0;
+  padding-block-end: clamp(2.5rem, 8vh, 5rem);
+}
+#home .info_detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+.profile-portrait {
+  position: relative;
+  margin-block-start: calc(var(--portrait-size) / -2);
+  left: calc((var(--hero-halo-x) - .5) * 100vw);
+  left: calc((var(--hero-halo-x) - .5) * 100cqw);
+}
 .info .info_detail .zoom {
   display: block;
-  width: clamp(9rem, 17vw, 12.5rem);
+  width: var(--portrait-size);
   height: auto;
   aspect-ratio: 1;
   z-index: auto;
@@ -190,7 +210,8 @@ p { font: inherit; }
   justify-content: center;
   flex-wrap: wrap;
   gap: .65rem 1.5rem;
-  margin-top: clamp(1.75rem, 7vh, 4.5rem);
+  margin-top: auto;
+  padding-block-start: clamp(1.75rem, 7vh, 4.5rem);
 }
 #home .button .btn { margin: 0; text-decoration: none; }
 #home .button .btn:hover { text-shadow: none; }
