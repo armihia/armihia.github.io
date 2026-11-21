@@ -5,16 +5,13 @@
 }
 body {
 	margin: 0;
-	overflow-x: hidden;
 	color: #fff;
 	font-family: 'Raleway', sans-serif;
 }
 ul, li {
 	list-style: none;
 }
-a, a:hover, a:focus {
-	text-decoration: none !important;
-	outline: none !important;
+a {
 	color: inherit;
 }
 .clear {

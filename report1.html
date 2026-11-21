@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIT Technology Review Interview</title>
     <style>
+        body {
+            width: min(760px, calc(100% - 32px));
+            margin: 28px auto;
+            color: #25232a;
+            line-height: 1.62;
+            overflow-wrap: anywhere;
+        }
         .title {
             text-align: center;
             font-weight: bolder;
             font-family: 'Times new roman';
-            font-size: 40px;
+            font-size: clamp(1.4rem, 5vw, 2.5rem);
             font-style:italic;
         }
         .title1 {
             text-align: center;
             font-weight: bolder;
             font-family: 'Times new roman';
-            font-size: 35px;
+            font-size: clamp(1.35rem, 4.5vw, 2.2rem);
+            line-height: 1.18;
         }
         .time {
             text-align: right;
@@ -29,7 +37,8 @@
             text-align: center;
         }
         img {
-            width: 400px;
+            width: min(400px, 100%);
+            height: auto;
         }
         .finally {
            text-align: right; 

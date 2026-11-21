@@ -1,0 +1,312 @@
+{
+  "profile": {
+    "name": "Hanzhong Zhang",
+    "field": "Human–Computer Interaction & Artificial Intelligence",
+    "role": "PhD researcher",
+    "institution": "University of Exeter",
+    "institutionUrl": "https://www.exeter.ac.uk/",
+    "supervisor": "Dr Siyang Song",
+    "supervisorUrl": "",
+    "location": "Exeter, United Kingdom",
+    "email": "armihia@foxmail.com",
+    "image": "images/alex.jpg",
+    "imageAlt": "Hanzhong Zhang leaning over a balcony in sunlight"
+  },
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/armihia"
+    }
+  ],
+  "research": {
+    "goal": "I’m working toward an artificial general intelligence (AGI) agent that models human cognition and consciousness and draws on experiences it accumulates in a simulated world.",
+    "approach": "I plan to connect the evolving internal states studied in Intentional Agent with the way PersMem models which experiences an agent remembers. In sandboxes such as CMASE, I want to test how social experience shapes an agent’s memory, interpretation, and behaviour over time.",
+    "influences": "I draw on psychology, phenomenology, and sociology when designing these models and experiments.",
+    "papers": [
+      {
+        "label": "Intentional Agent",
+        "url": "https://arxiv.org/abs/2609.34419",
+        "note": "Cognition and internal state"
+      },
+      {
+        "label": "PersMem",
+        "url": "https://arxiv.org/abs/2609.34372",
+        "note": "Personality and memory"
+      },
+      {
+        "label": "CMASE",
+        "url": "https://arxiv.org/abs/2508.17366",
+        "note": "A sandbox for social experience"
+      }
+    ],
+    "image": "images/thumbs/interview-portrait.webp",
+    "imageAlt": "Hanzhong Zhang in a red coat beside a white railing"
+  },
+  "publications": [
+    {
+      "title": "Beyond End-to-End Black Box Mapping: An Intentional Agent Framework for Cognitive-driven Facial Reaction Generation",
+      "authors": "Hanzhong Zhang, Jindong Wang, Siyang Song",
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2609.34419",
+      "summary": "The Intentional Agent uses appraisal, emotional drives and an evolving inner thought flow to generate facial reactions during conversation. The work tests whether explicitly modelling these intermediate states helps produce more perceptually plausible reactions.",
+      "status": "preprint",
+      "date": "2026-09-28",
+      "image": "https://arxiv.org/html/2609.34419v1/figure_2.png",
+      "figureAlt": "Figure 1. Internal dynamics model of the Intentional Agent.",
+      "placement": "preprint"
+    },
+    {
+      "title": "PersMem: Internalizing Personality into Dual-Pathway Memory for LLM Agents",
+      "authors": "Hanzhong Zhang, Ziwei Xiang, Weicheng Xie, Shizhe Liu, Siyang Song",
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2609.34372",
+      "summary": "PersMem gives an agent’s personality a role in appraising experiences, deciding what to keep, and recalling memories. Its experiments study whether those choices produce distinct memory and dialogue patterns across personality profiles.",
+      "status": "preprint",
+      "date": "2026-09-28",
+      "image": "https://arxiv.org/html/2609.34372v1/Figures/pipeline.png",
+      "figureAlt": "Figure 1. PersMem design principles and comparison with a conventional memory pipeline.",
+      "placement": "preprint"
+    },
+    {
+      "title": "Beyond Preset Identities: Selective Stance Accommodation and Interaction Reorganisation in Generative Agent Societies",
+      "authors": "Hanzhong Zhang, Siyang Song, Lu Liu, Jindong Wang",
+      "year": 2026,
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2603.23406",
+      "summary": "Experiments in CMASE trace how generative agents adapt their positions and reorganise partnerships. The study follows cases where agents partly accept arguments from sources they distrust and continue to coordinate despite disagreement.",
+      "aliases": [
+        "Beyond Preset Identities: How Agents Form Stances and Boundaries in Generative Societies"
+      ],
+      "status": "preprint",
+      "date": "2026-03-24",
+      "image": "images/thumbs/stance-outcomes.webp",
+      "figureAlt": "Figure 1 redrawn from Table 3. Stance departure and low-trust shifts for four interventions.",
+      "placement": "preprint"
+    },
+    {
+      "title": "Simulating Phenomenal Consciousness Using Generative Agents Based on Large Language Models",
+      "authors": "Hanzhong Zhang, Jibin Yin, H. Wang, Z. Xiang",
+      "year": 2025,
+      "venue": "Applied Soft Computing, 185, 113922",
+      "url": "https://doi.org/10.1016/j.asoc.2025.113922",
+      "summary": "Large Language Models (LLMs) still face challenges in tasks requiring understanding implicit instructions and applying common-sense knowledge. In such scenarios, LLMs may require multiple attempts to achieve human-level performance, potentially leading to inaccurate responses or inferences in practical environments, affecting their long-term consistency and behavior. This paper introduces the Internal Time-Consciousness Machine (ITCM), a computational consciousness structure. We further propose the ITCM-based Agent (ITCMA), which supports behavior generation and reasoning in open-world settings. ITCMA enhances LLMs' ability to understand implicit instructions and apply common-sense knowledge by considering agents' interaction and reasoning with the environment. Evaluations in the Alfworld environment show that trained ITCMA outperforms the state-of-the-art (SOTA) by 9% on the seen set. Even untrained ITCMA achieves a 96% task completion rate on the seen set, 5% higher than SOTA, indicating its superiority over traditional intelligent agents in utility and generalization. In real-world tasks with quadruped robots, the untrained ITCMA achieves an 85% task completion rate, which is close to its performance in the unseen set, demonstrating its comparable utility in real-world settings.",
+      "image": "images/thumbs/itcma.webp",
+      "status": "published",
+      "date": "2025-12",
+      "figureAlt": "Structure of the Internal Time-Consciousness Machine Based Agent.",
+      "placement": "published"
+    },
+    {
+      "title": "Can Agents Spontaneously Form a Society? Introducing a Novel Architecture for Generative Multi-Agents to Elicit Social Emergence",
+      "authors": "Hanzhong Zhang, Jibin Yin, Mulin Jiang, Cong Su",
+      "year": 2025,
+      "venue": "ACM UIST ’25 Adjunct Proceedings",
+      "url": "https://arxiv.org/abs/2409.06750",
+      "summary": "Generative agents have demonstrated impressive capabilities in specific tasks, but most of these frameworks focus on independent tasks and lack attention to social interactions. We introduce a generative agent architecture called ITCMA-S, which includes a basic framework for individual agents and a framework called LTRHA that supports social interactions among multi-agents. This architecture enables agents to identify and filter out behaviors that are detrimental to social interactions, guiding them to choose more favorable actions. We designed a sandbox environment to simulate the natural evolution of social relationships among multiple identity-less agents for experimental evaluation. The results showed that ITCMA-S performed well on multiple evaluation indicators, demonstrating its ability to actively explore the environment, recognize new agents, and acquire new information through continuous actions and dialogue. Observations show that as agents establish connections with each other, they spontaneously form cliques with internal hierarchies around a selected leader and organize collective activities.",
+      "image": "images/thumbs/uist-figure-1.webp",
+      "aliases": [
+        "Can Agents Spontaneously Form a Society? Introducing a Novel Architecture for Generative Multi-Agent to Elicit Social Emergence"
+      ],
+      "status": "published",
+      "date": "2025-09",
+      "figureAlt": "Figure 1 from the arXiv manuscript. Structure of the Internal Time-Consciousness Machine Based Agent.",
+      "placement": "published"
+    },
+    {
+      "title": "The Tribal Theater Model: Social Regulation for Dynamic User Adaptation in Virtual Interactive Environments",
+      "authors": "H. Zhang, B. Duan, H. Wang, Z. Qiao, J. Yin",
+      "year": 2025,
+      "venue": "Cognition, Technology & Work, 27, 487–501",
+      "url": "https://doi.org/10.1007/s10111-025-00810-z",
+      "summary": "This paper proposes a social regulation model for dynamic adaptation according to user characteristics in virtual interactive environments, namely the tribal theater model. The model focuses on organizational regulation and builds an interaction scheme with more resilient user performance by improving the subjectivity of the user. This paper discusses the sociological theoretical basis of this model and how it was migrated to an engineering implementation of a virtual interactive environment. The model defines user interactions within a field that are regulated by a matrix through the allocation of resources. To verify the effectiveness of the tribal theater model, we designed an experimental scene using a chatroom as an example. We trained the matrix as an AI model using a temporal transformer and compared it with an interaction field with different levels of control. The experimental results showed that the tribal theater model can improve users’ interactive experience, enhance resilient user performance, and effectively complete environmental interaction tasks under rule-based interaction.",
+      "status": "published",
+      "date": "2025-06-18",
+      "image": "https://media.springernature.com/m312/springer-static/image/art:10.1007%2Fs10111-025-00810-z/MediaObjects/10111_2025_810_Fig1_HTML.png",
+      "figureAlt": "Figure 1 from The Tribal Theater Model.",
+      "placement": "published"
+    },
+    {
+      "title": "Computational Multi-Agents Society Experiments: Social Modeling Framework Based on Generative Agents",
+      "authors": "Hanzhong Zhang, Muhua Huang, Jindong Wang",
+      "year": 2026,
+      "venue": "ACM Transactions on Social Computing (accepted)",
+      "url": "https://arxiv.org/abs/2508.17366",
+      "summary": "CMASE lets researchers join a simulated society as observers, interviewers or participants. Its experiments revisit studies of urban greenery and public-goods cooperation to examine how social interventions unfold inside the simulation.",
+      "image": "images/thumbs/cmase.webp",
+      "aliases": [
+        "Evolving Collective Cognition in Human–Agent Hybrid Societies: How Agents Form Stances and Boundaries"
+      ],
+      "status": "other",
+      "placement": "other"
+    },
+    {
+      "title": "VCounselor: A Psychological Intervention Chat Agent Based on a Knowledge-Enhanced Large Language Model",
+      "authors": "H. Zhang, Z. Qiao, H. Wang, B. Duan, J. Yin",
+      "year": 2024,
+      "venue": "Multimedia Systems, 30, 363",
+      "url": "https://doi.org/10.1007/s00530-024-01467-w",
+      "summary": "Conversational artificial intelligence can already independently engage in brief conversations with clients with psychological problems and provide evidence-based psychological interventions. The main objective of this study is to improve the effectiveness and credibility of the large language model in psychological intervention by creating a specialized agent, the VCounselor, to address the limitations observed in popular large language models such as ChatGPT in domain applications. We achieved this goal by proposing a new affective interaction structure and knowledge-enhancement structure. In order to evaluate VCounselor, this study compared the general large language model, the fine-tuned large language model, and VCounselor's knowledge-enhanced large language model. At the same time, the general large language model and the fine-tuned large language model will also be provided with an avatar to compare them as an agent with VCounselor. The comparison results indicated that the affective interaction structure and knowledge-enhancement structure of VCounselor significantly improved the effectiveness and credibility of the psychological intervention, and VCounselor significantly provided positive tendencies for clients' emotions. The conclusion of this study strongly supports that VConselor has a significant advantage in providing psychological support to clients by being able to analyze the patient's problems with relative accuracy and provide professional-level advice that enhances support for clients.",
+      "status": "published",
+      "placement": "other"
+    },
+    {
+      "title": "Social Intimacy and Skewed Love: A Study of the Attachment Relationship between Internet Group Users and a Digital Human",
+      "authors": "H. Zhang, Z. Xiang, J. Yin",
+      "year": 2023,
+      "venue": "Computers in Human Behavior: Artificial Humans",
+      "url": "https://doi.org/10.1016/j.chbah.2023.100019",
+      "summary": "Interactions between human beings and digital humans have become a new network phenomenon, and these relationships have gradually become a topic of research. There is still a lack of sufficient research on whether and what kind of attachment relationship exists in these situations. Based on this problem, in this study, a digital human was designed that was oriented to social software and put into chat groups for interaction and research. A questionnaire survey, case analysis, and netnography analysis were used to collect and examine relevant data. The study found a correlation between the type of attachment of users and the degree of attachment to the digital human. In addition, users who were heavily dependent on the network were more likely to try to complete their attachment with the digital human. Attachment with the digital human was able to calm the users’ emotional intensity. This attachment was considered as close to a skewed desire projection. Through the intermediary of a digital human, Internet users have been better able to fulfill some of their own desires.",
+      "status": "published",
+      "placement": "other"
+    },
+    {
+      "title": "A Needs Learning Algorithm Applied to Stable Gait Generation of Quadruped Robot",
+      "authors": "H. Zhang, J. Yin, H. Wang",
+      "year": 2022,
+      "venue": "Sensors, 22(19)",
+      "url": "https://doi.org/10.3390/s22197302",
+      "summary": "Based on Maslow’s hierarchy of needs theory, we have proposed a novel machine learning algorithm that combines factors of the environment and its own needs to make decisions for different states of an agent. This means it can be applied to the gait generation of a quadruped robot, which needs to make demand decisions. To evaluate the design, we created an experimental task in order to compare the needs learning algorithm with a reinforcement learning algorithm, which was also derived from psychological motivation theory. It was found that the needs learning algorithm outperformed the reinforcement learning in tasks that involved making decisions between different levels of needs. Finally, we applied the needs learning algorithm to the problem of stable gait generation of quadruped robot, and it had achieved good results in simulation and real robot.",
+      "status": "published",
+      "placement": "other"
+    },
+    {
+      "title": "A Study on the Factors Influencing the Teaching Effect of Moral and Social Courses in Primary Schools",
+      "authors": "H. Zhang, X. Zhang, X. Zhang, H. Dong, X. Li",
+      "year": 2022,
+      "venue": "International Journal of Information and Communication Technology Education, 18(2)",
+      "url": "https://doi.org/10.4018/ijicte.314231",
+      "summary": "Taking the influence of various factors on the teaching effect of moral and social courses of primary school students as the research content, a unified examination was conducted on third-grade students from 413 primary schools in Kunming, and 1270 valid questionnaires were obtained from their teachers. A questionnaire for teachers was innovatively designed with 52 dimensions, and the data were analyzed using the SPSS big data analysis platform to find the most influential factors in the teaching and learning of moral and social courses and to propose suggestions for improving the teaching effectiveness of moral and social courses.",
+      "status": "published",
+      "placement": "other"
+    },
+    {
+      "title": "The Study of a Five-Dimensional Emotional Model for Facial Emotion Recognition",
+      "authors": "H. Zhang, J. Yin, X. Zhang",
+      "year": 2020,
+      "venue": "Mobile Information Systems, 2020",
+      "url": "https://doi.org/10.1155/2020/8860608",
+      "summary": "Based on basic emotion theory and the PAD emotion model that can describe continuous emotion changes, we first propose a more general concept of a five-dimensional emotion model to better meet the needs in the area of emotion recognition. We determined the relationship between its dimensions and basic emotions, and used a Pearson correlation analysis, multi-layer perceptron, and other methods to compare and verify it with volunteer human identifiers. The results demonstrated that the five-dimensional Emotion model was better than human identification in the field of emotion recognition. We also compared it with the PAD emotion model. The results demonstrated that the five-dimensional emotion model performed better. Finally, using the proposed model, we designed a technology prototype of a mood adaptive interface to demonstrate its potential application.",
+      "status": "published",
+      "placement": "other"
+    }
+  ],
+  "news": [
+    {
+      "title": "Presenting social emergence in generative agents at UIST ’25",
+      "date": "2025",
+      "outlet": "ACM UIST",
+      "url": "https://programs.sigchi.org/uist/2025/people/list/209086",
+      "image": "images/thumbs/uist25.webp",
+      "secondaryImage": "images/thumbs/uist25-poster.webp"
+    },
+    {
+      "title": "MIT Technology Review interview on generative agents for companion robots and online counselling",
+      "date": "2024-05-29",
+      "outlet": "MIT Technology Review China",
+      "url": "report1.html",
+      "image": "images/thumbs/interview.webp",
+      "secondaryImage": "images/thumbs/interview-portrait.webp"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Social Generative Multi-Agents",
+      "category": "Research demo",
+      "url": "https://www.bilibili.com/video/BV18Cpbe2EAh/",
+      "image": "images/thumbs/social-agents.webp",
+      "summary": "Exploring how generative agents spontaneously form social groups."
+    },
+    {
+      "title": "Generative Agents",
+      "category": "Research demo",
+      "url": "https://www.bilibili.com/video/BV19t421n7Ef/",
+      "image": "images/thumbs/generative-agents.webp",
+      "summary": "An agent deployed on a quadruped robot to carry out everyday tasks."
+    },
+    {
+      "title": "Virtual Counselor",
+      "category": "Research demo",
+      "url": "https://www.bilibili.com/video/BV1Zp421C7eF/",
+      "image": "images/thumbs/counselor.webp",
+      "summary": "A dialogue agent for psychological interventions, shown on a pseudo-holographic display."
+    },
+    {
+      "title": "Virtual Singer Suzuran",
+      "category": "Creative project",
+      "url": "https://www.bilibili.com/video/BV1JX4y187zE/",
+      "image": "images/thumbs/suzuran.webp",
+      "summary": "A virtual singer with AI-generated appearance, voice, and video."
+    },
+    {
+      "title": "Lily in the Valley",
+      "category": "Game",
+      "url": "https://www.bilibili.com/video/BV1Pz4y1y7JH/",
+      "image": "images/thumbs/lily.webp",
+      "summary": "A 3D role-playing game built in Unity."
+    },
+    {
+      "title": "Video Generation Tool",
+      "category": "Tool",
+      "url": "https://github.com/amihia/auto_video",
+      "image": "images/thumbs/video-tool.webp",
+      "summary": "Turns text logs from tabletop role-playing games into videos."
+    }
+  ],
+  "photos": [
+    {
+      "image": "images/bg-mia.jpg",
+      "alt": "Sunlight crests a mountain ridge above a quiet valley",
+      "caption": "Sunlight over the mountains",
+      "featured": true
+    },
+    {
+      "image": "images/bg-contact.jpg",
+      "alt": "A framed picture in a window overlooking a dense hillside town",
+      "caption": "A hillside town",
+      "featured": true
+    }
+  ],
+  "personal": {
+    "quote": "Although it may not be real life now, real life will come one day.",
+    "interests": "Photography, reading, creative writing, and musicals.",
+    "skills": "Python, Java, JavaScript, C, C#, C++, and SQL."
+  },
+  "experience": [
+    {
+      "title": "Intermediate Industrial Internet Platform Development Engineer (Level 5)",
+      "detail": "Ministry of Industry and Information Technology of China"
+    },
+    {
+      "title": "Yunnan Province’s Merit Graduate Students",
+      "detail": "Education Department of Yunnan Province, China",
+      "year": 2024
+    },
+    {
+      "title": "National Scholarship for Postgraduates",
+      "detail": "Ministry of Education of China",
+      "year": 2023
+    },
+    {
+      "title": "Outstanding Undergraduate Thesis",
+      "detail": "Kunming University of Science and Technology",
+      "year": 2022
+    },
+    {
+      "title": "Second Prize",
+      "detail": "13th China University Computer Design Competition"
+    },
+    {
+      "title": "Second Prize",
+      "detail": "Python Group, 11th Lanqiao Cup China Software and Information Technology Professionals Competition"
+    }
+  ],
+  "sources": {
+    "scholarId": "94qqYBYAAAAJ",
+    "orcid": "0000-0001-9495-4996",
+    "bilibiliUid": "",
+    "hiddenPublications": [],
+    "hiddenVideos": []
+  }
+}

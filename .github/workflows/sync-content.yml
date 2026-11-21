@@ -1,0 +1,71 @@
+name: Sync homepage content
+
+on:
+  schedule:
+    - cron: '23 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: homepage-content-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'armihia/armihia.github.io'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check publishing credentials
+        id: config
+        env:
+          SITE_SYNC_TOKEN: ${{ secrets.SITE_SYNC_TOKEN }}
+        run: |
+          if [[ -n "$SITE_SYNC_TOKEN" ]]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          else
+            echo '::notice::Set the SITE_SYNC_TOKEN repository secret to enable publishing.'
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.config.outputs.enabled == 'true'
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Fetch publication and video metadata
+        id: sources
+        if: steps.config.outputs.enabled == 'true'
+        continue-on-error: true
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          ORCID_ACCESS_TOKEN: ${{ secrets.ORCID_ACCESS_TOKEN }}
+          BILIBILI_RSS_BASE: ${{ vars.BILIBILI_RSS_BASE }}
+        run: python3 scripts/sync_content.py
+
+      - name: Publish changed metadata
+        if: steps.config.outputs.enabled == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.SITE_SYNC_TOKEN }}
+        run: |
+          if git diff --quiet -- api/imports.json; then exit 0; fi
+          python3 - <<'PY' | gh api --method PUT "repos/$GITHUB_REPOSITORY/contents/api/imports.json" --input - --silent
+          from base64 import b64encode
+          import json
+          from pathlib import Path
+          import subprocess
+
+          path = "api/imports.json"
+          sha = subprocess.check_output(["git", "rev-parse", f"HEAD:{path}"], text=True).strip()
+          print(json.dumps({
+              "message": "Sync homepage publications and videos",
+              "content": b64encode(Path(path).read_bytes()).decode("ascii"),
+              "sha": sha,
+              "branch": "main",
+          }))
+          PY
+
+      - name: Report unavailable sources
+        if: steps.sources.outcome == 'failure'
+        run: exit 1

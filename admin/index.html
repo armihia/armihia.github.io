@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api.github.com; img-src 'self' blob: https:; base-uri 'none'; form-action 'none'">
+  <title>维护个人主页</title>
+  <link rel="icon" href="../images/favicon.png">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script type="module" src="../js/admin.js"></script>
+</head>
+<body>
+  <main class="wrap editor">
+    <header class="editor-heading">
+      <a href="../">返回主页</a>
+      <h1>维护个人主页</h1>
+      <p>编辑个人介绍、论文、轮播动态和照片。发布后，GitHub Pages 会更新主页。</p>
+    </header>
+
+    <form id="connect-form" class="editor-panel">
+      <h2>连接 GitHub</h2>
+      <p>使用有权写入 <strong>armihia/armihia.github.io</strong> 的 GitHub 令牌加载最新内容。</p>
+      <details class="token-help">
+        <summary>首次连接</summary>
+        <p>在 GitHub 创建仅限此仓库的细粒度令牌，将仓库权限 <strong>Contents</strong> 设为 <strong>Read and write</strong>。令牌只保存在当前标签页的内存中。</p>
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">创建 GitHub 令牌</a>
+      </details>
+      <div class="connect-fields">
+        <label>GitHub 令牌 <input type="password" id="token" required autocomplete="off" spellcheck="false"></label>
+        <button type="submit" class="primary" id="connect">连接 GitHub</button>
+      </div>
+      <p class="editor-status" id="connection-status" role="status"></p>
+      <noscript>此表单需要 JavaScript。</noscript>
+    </form>
+
+    <form id="content-form" novalidate hidden>
+      <fieldset id="editor-fields" class="editor-fields" aria-label="主页内容"></fieldset>
+      <div class="editor-toolbar">
+        <p class="editor-status" id="save-status" role="status">已加载 GitHub 上的最新内容。</p>
+        <div class="editor-actions">
+          <button type="button" id="download">下载 JSON</button>
+          <button type="submit" class="primary" id="save" disabled>发布修改</button>
+        </div>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
