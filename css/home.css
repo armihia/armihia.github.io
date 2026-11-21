@@ -93,15 +93,36 @@ p { font: inherit; }
 }
 #home .info { margin-block: 0; }
 #home .info_detail { margin: 0; }
+.profile-portrait { display: inline-block; position: relative; vertical-align: middle; }
 .info .info_detail .zoom {
+  display: block;
   width: clamp(9rem, 17vw, 12.5rem);
   height: auto;
   aspect-ratio: 1;
-  vertical-align: middle;
   z-index: auto;
 }
 .info .info_detail .zoom img { object-fit: cover; }
 .info .info_detail .zoom:hover img { cursor: default; }
+.portrait-switch {
+  position: absolute;
+  inset: auto 2% 2% auto;
+  display: grid;
+  place-items: center;
+  width: 2.625rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 1px 6px rgb(0 0 0 / .28);
+  font: 1.4rem/1 Arial, sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.portrait-switch:hover { color: var(--accent-hover); background: #eff5fa; }
+.portrait-switch:active { background: #e3eef7; }
+.portrait-switch:focus-visible { outline-color: #fff; }
 #home h1 {
   margin: clamp(1.4rem, 4.5vh, 3rem) 0 .3rem;
   color: #fff;

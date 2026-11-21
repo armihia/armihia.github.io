@@ -10,7 +10,10 @@
     "location": "Exeter, United Kingdom",
     "email": "armihia@foxmail.com",
     "image": "images/alex.jpg",
-    "imageAlt": "Hanzhong Zhang leaning over a balcony in sunlight"
+    "imageAlt": "Hanzhong Zhang leaning over a balcony in sunlight",
+    "secondaryImage": "images/thumbs/interview-portrait.webp",
+    "secondaryImageAlt": "Hanzhong Zhang in a red coat beside a white railing",
+    "defaultPortrait": "primary"
   },
   "links": [
     {

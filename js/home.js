@@ -76,6 +76,35 @@ function setupMenu() {
   menu.addEventListener("close", () => toggle.setAttribute("aria-expanded", "false"));
 }
 
+function renderPortrait(profile) {
+  const portrait = byId("portrait");
+  const photos = [
+    { url: contentUrl(profile.image), alt: profile.imageAlt },
+    { url: contentUrl(profile.secondaryImage), alt: profile.secondaryImageAlt },
+  ].filter(({ url }) => url);
+  portrait.hidden = !photos.length;
+  if (!photos.length) return;
+
+  const photo = portrait.querySelector("img");
+  const canSwitch = photos.length === 2 && photos[0].url !== photos[1].url;
+  let index = canSwitch && profile.defaultPortrait === "secondary" ? 1 : 0;
+
+  function showPhoto() {
+    const { url, alt } = photos[index];
+    photo.src = url;
+    photo.alt = alt || profile.name;
+  }
+  showPhoto();
+
+  const toggle = byId("portrait-switch");
+  if (!toggle || !canSwitch) return;
+  toggle.hidden = false;
+  toggle.addEventListener("click", () => {
+    index = 1 - index;
+    showPhoto();
+  });
+}
+
 function renderProfile(profile, links) {
   if (!profile?.name) return;
   document.title = `${profile.name} - Personal website`;
@@ -95,14 +124,7 @@ function renderProfile(profile, links) {
   if (affiliation.textContent) affiliation.append(".");
   affiliation.hidden = !affiliation.textContent;
 
-  const portrait = byId("portrait");
-  const photo = portrait.querySelector("img");
-  const portraitUrl = contentUrl(profile.image);
-  portrait.hidden = !portraitUrl;
-  if (portraitUrl) {
-    photo.src = portraitUrl;
-    photo.alt = profile.imageAlt || profile.name;
-  }
+  renderPortrait(profile);
 
   const email = emailUrl(profile.email);
   setList("profile-links", links, ({ label, url }) => listItem(link(label, url)));

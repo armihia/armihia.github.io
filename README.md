@@ -11,7 +11,8 @@
 
 - **论文**支持编辑标题、作者、日期、发表状态和摘要，并上传 PDF 与首图。用 **首页展示位置** 选择「最新发表」「最新预印本」或「其他论文」。前两组各最多三篇，按后台的排列顺序展示。自动同步的新条目先进入 Other Publications。展开 **自动同步的论文** 可把条目加到编辑列表，补充信息后调整展示位置。
 - **轮播动态**支持添加、编辑和删除动态，可以改标题、日期、来源、正文、链接和两张配图。用 **上移**、**下移** 调整轮播顺序。
-- **个人介绍（About Me）**支持修改标题、正文和左侧图片。正文用空行分段。学校和导师在 **个人资料与首屏头像** 中维护，也可以在介绍里关闭显示。首页圆形头像在个人资料中单独更换。
+- **个人介绍（About Me）**支持修改标题、正文和左侧图片。正文用空行分段。学校和导师在 **个人资料与首屏头像** 中维护，也可以在介绍里关闭显示。
+- **个人资料与首屏头像**支持分别上传两张头像，并通过 **默认显示的头像** 指定访客进入首页时看到的那一张。访客可点头像右下角的圆形按钮切换。
 - **摄影**支持上传、替换和删除照片，也可更改图片描述、图注和顺序。用 **首页精选** 选择首页展示的照片，最多三张。 [摄影页](https://armihia.github.io/photography/)
 
 由后台上传且内容里已无引用的文件会在发布时从当前分支删除，提交历史仍可追溯。
@@ -37,7 +38,7 @@
 
 保留无关字段以及当前文件的 `sha`。如果 GitHub 返回冲突，重新读取并合并需要修改的字段。后台使用 GitHub 的 `createCommitOnBranch` 将上传的文件、删除操作和 JSON 写入同一个提交。 [GitHub GraphQL API](https://docs.github.com/en/graphql/reference/commits#createcommitonbranch)
 
-论文的 `placement` 为 `published`、`preprint` 或 `other`，公开 PDF 地址写入 `pdf`。个人介绍可使用 `research.body` 和 `research.image`。既有的 `goal`、`approach` 和 `influences` 仍可作为介绍正文的来源。
+论文的 `placement` 为 `published`、`preprint` 或 `other`，公开 PDF 地址写入 `pdf`。个人介绍可使用 `research.body` 和 `research.image`。既有的 `goal`、`approach` 和 `influences` 仍可作为介绍正文的来源。两张首页头像分别由 `profile.image` 和 `profile.secondaryImage` 设置，`profile.defaultPortrait` 可填写 `primary` 或 `secondary`。
 
 ## 自动同步论文和视频
 

@@ -23,6 +23,11 @@ const publicationStatuses = [
 const publicationPlacements = [
   ["published", "最新发表"], ["preprint", "最新预印本"], ["other", "其他论文"],
 ];
+const selectOptions = {
+  "publication-status": publicationStatuses,
+  "publication-placement": publicationPlacements,
+  "portrait-default": [["primary", "第一张头像"], ["secondary", "第二张头像"]],
+};
 const placementNames = Object.fromEntries(publicationPlacements);
 
 let credential;
@@ -38,7 +43,9 @@ const sections = [
       ["institution", "学校或机构"], ["institutionUrl", "机构网址", "url"],
       ["supervisor", "导师"], ["supervisorUrl", "导师网址", "url"],
       ["location", "所在地"], ["email", "邮箱", "email"],
-      ["image", "首屏头像", "image"], ["imageAlt", "头像描述"],
+      ["image", "第一张头像", "image"], ["imageAlt", "第一张头像描述"],
+      ["secondaryImage", "第二张头像", "image"], ["secondaryImageAlt", "第二张头像描述"],
+      ["defaultPortrait", "默认显示的头像", "portrait-default", false, "primary"],
     ],
   },
   {
@@ -207,7 +214,7 @@ function control(record, [key, title, type = "text", required = false, fallback]
   const label = element("label", "", title);
   const multiline = type === "long" || type === "lines";
   const checkbox = type === "checkbox";
-  const options = { "publication-status": publicationStatuses, "publication-placement": publicationPlacements }[type];
+  const options = selectOptions[type];
   const input = element(options ? "select" : multiline ? "textarea" : "input");
   if (options) {
     input.setAttribute("aria-label", title);
