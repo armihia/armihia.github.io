@@ -13,6 +13,7 @@ const form = $("content-form");
 const fields = $("editor-fields");
 const pendingFiles = new Map();
 const imageExtensions = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif" };
+const avatarSize = 640;
 const uploadLimitMiB = 50;
 const uploadLimit = uploadLimitMiB * 1024 * 1024;
 const fileId = "[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}";
@@ -39,13 +40,14 @@ let dirty = false;
 const sections = [
   {
     label: "个人资料与首屏头像", key: "profile", open: true,
+    hint: `上传的头像会等比居中取方形，调整到 ${avatarSize} × ${avatarSize} 后压缩保存。`,
     fields: [
       ["name", "姓名", "text", true], ["field", "研究领域"], ["role", "身份"],
       ["institution", "学校或机构"], ["institutionUrl", "机构网址", "url"],
       ["supervisor", "导师"], ["supervisorUrl", "导师网址", "url"],
       ["location", "所在地"], ["email", "邮箱", "email"],
-      ["image", "第一张头像", "image"], ["imageAlt", "第一张头像描述"],
-      ["secondaryImage", "第二张头像", "image"], ["secondaryImageAlt", "第二张头像描述"],
+      ["image", "第一张头像", "avatar"], ["imageAlt", "第一张头像描述"],
+      ["secondaryImage", "第二张头像", "avatar"], ["secondaryImageAlt", "第二张头像描述"],
       ["defaultPortrait", "默认显示的头像", "portrait-default", false, "primary"],
     ],
   },
@@ -149,7 +151,7 @@ function bilibiliId(value) {
 
 function validate(value, type) {
   if (!value) return "";
-  if (["image", "pdf", "url"].includes(type) && !contentUrl(value)) return "请填写 HTTPS 网址或站内文件路径。";
+  if (["image", "avatar", "pdf", "url"].includes(type) && !contentUrl(value)) return "请填写 HTTPS 网址或站内文件路径。";
   if (type === "email" && !emailUrl(value)) return "请填写有效的邮箱地址。";
   if (type === "scholar" && !/^[\w-]+$/.test(value)) return "请填写 Google Scholar 网址中 user= 后的 ID。";
   if (type === "orcid" && !/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(value)) return "请填写格式如 0000-0001-9495-4996 的 ORCID。";
@@ -158,6 +160,35 @@ function validate(value, type) {
     return "请填写 YYYY-MM 或 YYYY-MM-DD 格式的日期。";
   }
   return "";
+}
+
+async function compressAvatar(file) {
+  const source = URL.createObjectURL(file);
+  try {
+    const image = new Image();
+    image.src = source;
+    await image.decode();
+    const canvas = element("canvas");
+    canvas.width = canvas.height = avatarSize;
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("Could not create an image canvas");
+    const { naturalWidth: width, naturalHeight: height } = image;
+    const square = Math.min(width, height);
+    context.imageSmoothingQuality = "high";
+    context.drawImage(image, (width - square) / 2, (height - square) / 2, square, square, 0, 0, avatarSize, avatarSize);
+
+    const encode = (type) => new Promise((resolve) => canvas.toBlob(resolve, type, .84));
+    const webp = await encode("image/webp");
+    if (webp?.type === "image/webp") return webp;
+    context.globalCompositeOperation = "destination-over";
+    context.fillStyle = "#fff";
+    context.fillRect(0, 0, avatarSize, avatarSize);
+    const jpeg = await encode("image/jpeg");
+    if (jpeg?.type !== "image/jpeg") throw new Error("Could not encode the avatar");
+    return jpeg;
+  } finally {
+    URL.revokeObjectURL(source);
+  }
 }
 
 function fileControl(wrapper, input, update, type) {
@@ -191,15 +222,30 @@ function fileControl(wrapper, input, update, type) {
   }
 
   input.addEventListener("change", showPreview);
-  upload.addEventListener("change", () => {
-    const file = upload.files[0];
+  upload.addEventListener("change", async () => {
+    let file = upload.files[0];
     upload.value = "";
-    if (!file) return;
-    const extension = pdf ? (/\.pdf$/i.test(file.name) || file.type === "application/pdf" ? "pdf" : "") : imageExtensions[file.type];
+    if (!file || fields.disabled) return;
+    let extension = pdf ? (/\.pdf$/i.test(file.name) || file.type === "application/pdf" ? "pdf" : "") : imageExtensions[file.type];
     if (!extension || !file.size || file.size > uploadLimit) {
       const formats = pdf ? "PDF" : "JPG、PNG、WebP 或 AVIF";
       status($("save-status"), `请选择有效且不超过 ${uploadLimitMiB} MiB 的 ${formats} 文件。`, true);
       return;
+    }
+    if (type === "avatar") {
+      fields.disabled = true;
+      $("save").disabled = true;
+      status($("save-status"), "正在调整头像尺寸并压缩…");
+      try {
+        file = await compressAvatar(file);
+        extension = imageExtensions[file.type];
+      } catch {
+        status($("save-status"), "头像处理失败，请选择另一张图片重试。", true);
+        return;
+      } finally {
+        fields.disabled = false;
+        $("save").disabled = !dirty;
+      }
     }
     const directory = pdf ? "papers/uploads" : "images/uploads";
     const filePath = `${directory}/${crypto.randomUUID()}.${extension}`;
@@ -259,7 +305,7 @@ function control(record, [key, title, type = "text", required = false, fallback]
     setDirty();
   }
   input.addEventListener("input", update);
-  if (type === "image" || type === "pdf") fileControl(wrapper, input, update, type);
+  if (["image", "avatar", "pdf"].includes(type)) fileControl(wrapper, input, update, type);
   return wrapper;
 }
 

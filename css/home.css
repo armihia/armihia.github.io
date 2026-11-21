@@ -6,6 +6,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: FontAwesome;
+  src: url("../font-awesome/4.6.1/fonts/fontawesome-webfont.woff2") format("woff2");
+  font-display: block;
+  unicode-range: U+F021;
+}
+
 :root {
   color-scheme: light;
   --page: #fff;
@@ -163,7 +170,13 @@ p { font: inherit; }
   border: .4rem solid transparent;
   border-top-color: var(--surface);
 }
-.profile-portrait:is(:hover, :focus-within) .portrait-description { visibility: visible; }
+.profile-portrait:is(:hover, :focus-within) .portrait-description {
+  visibility: visible;
+  animation: portrait-description-in .16s ease-out;
+}
+@keyframes portrait-description-in {
+  from { opacity: 0; transform: translate(-50%, .2rem); }
+}
 .portrait-switch {
   position: absolute;
   inset: auto 2% 2% auto;
@@ -174,15 +187,16 @@ p { font: inherit; }
   padding: 0;
   border: 1px solid var(--rule);
   border-radius: 50%;
-  color: var(--accent);
+  color: #666;
   background: var(--surface);
   box-shadow: 0 1px 6px rgb(0 0 0 / .28);
-  font: 1.4rem/1 Arial, sans-serif;
+  font: 1.05rem/1 FontAwesome;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.portrait-switch:hover { color: var(--accent-hover); background: #eff5fa; }
-.portrait-switch:active { background: #e3eef7; }
+.portrait-switch:hover { color: #444; background: #f4f4f4; }
+.portrait-switch:active { background: #eaeaea; }
+.portrait-switch[aria-busy="true"] { cursor: progress; }
 .portrait-switch:focus-visible { outline-color: #fff; }
 #home h1 {
   margin: clamp(1.4rem, 4.5vh, 3rem) 0 .3rem;
@@ -452,5 +466,6 @@ figcaption { margin-top: .35rem; color: var(--muted); font-size: .9rem; }
 @media (prefers-reduced-motion: reduce) {
   .profile-portrait .zoom { transition: none; }
   .profile-portrait:is(:hover, :focus-within) .zoom { transform: none; }
+  .profile-portrait:is(:hover, :focus-within) .portrait-description { animation: none; }
   #home .button a { transition: none; }
 }

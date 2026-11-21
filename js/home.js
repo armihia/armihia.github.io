@@ -125,31 +125,64 @@ function renderPortrait(profile) {
   portrait.hidden = !photos.length;
   if (!photos.length) return;
 
-  const photo = portrait.querySelector("img");
+  let photo = portrait.querySelector("img");
   const description = byId("portrait-description");
   const canSwitch = photos.length === 2 && photos[0].url !== photos[1].url;
   let index = canSwitch && profile.defaultPortrait === "secondary" ? 1 : 0;
+  let switching = false;
+  let descriptionTimer;
 
-  function showPhoto() {
-    const { url, alt } = photos[index];
+  function updateDescription() {
+    const { alt } = photos[index];
     const text = typeof alt === "string" ? alt.trim() : "";
-    photo.src = url;
     photo.alt = text || profile.name;
     if (description) {
       description.textContent = text;
-      description.hidden = !text;
+      description.hidden = true;
       if (text) photo.tabIndex = 0;
       else photo.removeAttribute("tabindex");
     }
   }
-  showPhoto();
+
+  function showDescription() {
+    if (description) description.hidden = !description.textContent;
+  }
+
+  const initialPhoto = photo;
+  photo.src = photos[index].url;
+  updateDescription();
+  photo.decode().then(() => {
+    if (!switching && photo === initialPhoto) showDescription();
+  }, () => {});
 
   const toggle = byId("portrait-switch");
   if (!toggle || !canSwitch) return;
   toggle.hidden = false;
-  toggle.addEventListener("click", () => {
-    index = 1 - index;
-    showPhoto();
+  toggle.addEventListener("click", async () => {
+    if (switching) return;
+    switching = true;
+    toggle.setAttribute("aria-busy", "true");
+    clearTimeout(descriptionTimer);
+    if (description) description.hidden = true;
+
+    const nextIndex = 1 - index;
+    const nextPhoto = photo.cloneNode(false);
+    nextPhoto.src = photos[nextIndex].url;
+    try {
+      await nextPhoto.decode();
+      const restoreFocus = document.activeElement === photo;
+      photo.replaceWith(nextPhoto);
+      photo = nextPhoto;
+      index = nextIndex;
+      updateDescription();
+      if (restoreFocus && photo.tabIndex === 0) photo.focus({ preventScroll: true });
+      descriptionTimer = setTimeout(showDescription, 170);
+    } catch {
+      if (photo.complete && photo.naturalWidth) showDescription();
+    } finally {
+      switching = false;
+      toggle.removeAttribute("aria-busy");
+    }
   });
 }
 
