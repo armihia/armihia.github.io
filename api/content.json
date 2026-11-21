@@ -264,15 +264,56 @@
   "photos": [
     {
       "image": "images/bg-mia.jpg",
-      "alt": "Sunlight crests a mountain ridge above a quiet valley",
-      "caption": "Sunlight over the mountains",
+      "alt": "Shangri-La!",
+      "caption": "Shangri-La!",
       "featured": true
     },
     {
       "image": "images/bg-contact.jpg",
-      "alt": "A framed picture in a window overlooking a dense hillside town",
-      "caption": "A hillside town",
+      "alt": "Starlight Night Market in Xishuangbanna.",
+      "caption": "Starlight Night Market in Xishuangbanna.",
       "featured": true
+    },
+    {
+      "featured": true,
+      "image": "images/uploads/f03fd312-80f8-4eef-8c5f-cbd1fe4edc05.png",
+      "alt": "Kunming. On the road around Dianchi Lake.",
+      "caption": "Kunming. On the road around Dianchi Lake."
+    },
+    {
+      "featured": false,
+      "image": "images/uploads/26912999-d997-4f71-be1c-cae89db7b256.png",
+      "alt": "Kuming"
+    },
+    {
+      "featured": false,
+      "image": "images/uploads/137eb194-8d50-4628-ae25-78c10667dc1e.png",
+      "alt": "Busan"
+    },
+    {
+      "featured": false,
+      "image": "images/uploads/92c23b4b-f680-4e23-9f89-cfcda22b7dfb.png",
+      "alt": "Yangzhou"
+    },
+    {
+      "featured": false,
+      "image": "images/uploads/95efc97c-7159-4a90-934f-20caf760058f.png",
+      "alt": "Shangri-La"
+    },
+    {
+      "featured": true,
+      "image": "images/uploads/e882c551-115b-4be1-bab3-08829f409594.png",
+      "alt": "!"
+    },
+    {
+      "featured": false,
+      "image": "images/uploads/20776c2c-7849-4778-b6c9-05d487e21833.png",
+      "alt": "Beihai"
+    },
+    {
+      "featured": false,
+      "image": "images/uploads/10266fd0-ebca-4067-8b62-f7d6ba838f11.png",
+      "alt": "Kunming"
     }
   ],
   "personal": {
@@ -282,8 +323,14 @@
   },
   "experience": [
     {
-      "title": "Intermediate Industrial Internet Platform Development Engineer (Level 5)",
-      "detail": "Ministry of Industry and Information Technology of China"
+      "title": "CSC and University of Exeter PhD Scholarships",
+      "year": 2026,
+      "detail": "China Scholarship Council"
+    },
+    {
+      "title": "Outstanding Graduate Thesis",
+      "detail": "Kunming University of Science and Technology",
+      "year": 2025
     },
     {
       "title": "Yunnan Province’s Merit Graduate Students",
@@ -301,18 +348,25 @@
       "year": 2022
     },
     {
-      "title": "Second Prize",
-      "detail": "13th China University Computer Design Competition"
+      "title": "Intermediate Industrial Internet Platform Development Engineer (Level 5)",
+      "detail": "Ministry of Industry and Information Technology of China",
+      "year": 2021
     },
     {
       "title": "Second Prize",
-      "detail": "Python Group, 11th Lanqiao Cup China Software and Information Technology Professionals Competition"
+      "detail": "13th China University Computer Design Competition",
+      "year": 2020
+    },
+    {
+      "title": "Second Prize",
+      "detail": "Python Group, 11th Lanqiao Cup China Software and Information Technology Professionals Competition",
+      "year": 2020
     }
   ],
   "sources": {
     "scholarId": "94qqYBYAAAAJ",
     "orcid": "0000-0001-9495-4996",
-    "bilibiliUid": "",
+    "bilibiliUid": "24880228",
     "hiddenPublications": [],
     "hiddenVideos": []
   },
