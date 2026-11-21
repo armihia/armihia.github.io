@@ -8,8 +8,8 @@
   <link rel="icon" href="images/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/jpushmenu.css">
-  <link rel="stylesheet" href="css/home.css">
-  <script type="module" src="js/home.js"></script>
+  <link rel="stylesheet" href="css/home.css?v=portrait-placeholder">
+  <script type="module" src="js/home.js?v=portrait-placeholder"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-copy="site.skipToContent">Skip to content</a>
@@ -41,10 +41,8 @@
     <div class="wrap info">
       <div class="info_detail">
         <div class="profile-portrait" id="portrait">
-          <div class="zoom">
-            <img id="profile-photo" src="images/alex.jpg" alt="Hanzhong Zhang leaning over a balcony in sunlight" width="437" height="437" fetchpriority="high" referrerpolicy="no-referrer">
-          </div>
-          <button class="portrait-switch" id="portrait-switch" type="button" aria-label="Switch profile photo" aria-controls="profile-photo" title="Switch profile photo" data-copy-label="site.switchPortrait" data-copy-title="site.switchPortrait" hidden>
+          <div class="zoom" id="portrait-frame"></div>
+          <button class="portrait-switch" id="portrait-switch" type="button" aria-label="Switch profile photo" aria-controls="portrait-frame" title="Switch profile photo" data-copy-label="site.switchPortrait" data-copy-title="site.switchPortrait" hidden>
             <span aria-hidden="true">&#xf021;</span>
           </button>
           <span class="portrait-description" id="portrait-description" aria-hidden="true" hidden></span>

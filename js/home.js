@@ -125,35 +125,64 @@ function renderPortrait(profile) {
   portrait.hidden = !photos.length;
   if (!photos.length) return;
 
-  let photo = portrait.querySelector("img");
+  const frame = portrait.querySelector(".zoom");
   const description = byId("portrait-description");
   const canSwitch = photos.length === 2 && photos[0].url !== photos[1].url;
   let index = canSwitch && profile.defaultPortrait === "secondary" ? 1 : 0;
+  let photo;
+  let photoRequest = 0;
   let switching = false;
   let descriptionTimer;
-
-  function updateDescription() {
-    const { alt } = photos[index];
-    const text = typeof alt === "string" ? alt.trim() : "";
-    photo.alt = text || profile.name;
-    if (description) {
-      description.textContent = text;
-      description.hidden = true;
-      if (text) photo.tabIndex = 0;
-      else photo.removeAttribute("tabindex");
-    }
-  }
 
   function showDescription() {
     if (description) description.hidden = !description.textContent;
   }
 
-  const initialPhoto = photo;
-  photo.src = photos[index].url;
-  updateDescription();
-  photo.decode().then(() => {
-    if (!switching && photo === initialPhoto) showDescription();
-  }, () => {});
+  async function showPhoto(nextIndex, descriptionDelay = 0) {
+    const request = ++photoRequest;
+    const restoreFocus = frame.contains(document.activeElement);
+    clearTimeout(descriptionTimer);
+    if (description) description.hidden = true;
+    frame.replaceChildren();
+    frame.setAttribute("aria-busy", "true");
+
+    const { url, alt } = photos[nextIndex];
+    const text = typeof alt === "string" ? alt.trim() : "";
+    const nextPhoto = new Image();
+    nextPhoto.id = "profile-photo";
+    nextPhoto.alt = text || profile.name;
+    nextPhoto.referrerPolicy = "no-referrer";
+    nextPhoto.fetchPriority = "high";
+    nextPhoto.src = url;
+    if (text && description) nextPhoto.tabIndex = 0;
+
+    try {
+      await nextPhoto.decode();
+      if (request !== photoRequest) return;
+      photo = nextPhoto;
+      index = nextIndex;
+      frame.replaceChildren(photo);
+      if (description) {
+        description.textContent = text;
+        descriptionTimer = setTimeout(showDescription, descriptionDelay);
+      }
+    } catch {
+      if (request !== photoRequest) return;
+      if (photo) {
+        frame.replaceChildren(photo);
+        showDescription();
+      } else index = nextIndex;
+    } finally {
+      if (request === photoRequest) {
+        frame.removeAttribute("aria-busy");
+        if (restoreFocus && document.activeElement === document.body && photo?.tabIndex === 0) {
+          photo.focus({ preventScroll: true });
+        }
+      }
+    }
+  }
+
+  showPhoto(index);
 
   const toggle = byId("portrait-switch");
   if (!toggle || !canSwitch) return;
@@ -162,23 +191,8 @@ function renderPortrait(profile) {
     if (switching) return;
     switching = true;
     toggle.setAttribute("aria-busy", "true");
-    clearTimeout(descriptionTimer);
-    if (description) description.hidden = true;
-
-    const nextIndex = 1 - index;
-    const nextPhoto = photo.cloneNode(false);
-    nextPhoto.src = photos[nextIndex].url;
     try {
-      await nextPhoto.decode();
-      const restoreFocus = document.activeElement === photo;
-      photo.replaceWith(nextPhoto);
-      photo = nextPhoto;
-      index = nextIndex;
-      updateDescription();
-      if (restoreFocus && photo.tabIndex === 0) photo.focus({ preventScroll: true });
-      descriptionTimer = setTimeout(showDescription, 170);
-    } catch {
-      if (photo.complete && photo.naturalWidth) showDescription();
+      await showPhoto(1 - index, 170);
     } finally {
       switching = false;
       toggle.removeAttribute("aria-busy");

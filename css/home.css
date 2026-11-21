@@ -137,6 +137,7 @@ p { font: inherit; }
   z-index: auto;
   transition: transform .18s ease-out;
 }
+.profile-portrait .zoom:empty { background-color: #909090; }
 .info .info_detail .zoom img { object-fit: cover; }
 .profile-portrait:is(:hover, :focus-within) .zoom { transform: scale(.96); }
 .profile-portrait .zoom:focus-within { outline: 2px solid #fff; outline-offset: 4px; }
