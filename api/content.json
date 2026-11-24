@@ -51,6 +51,19 @@
   },
   "publications": [
     {
+      "placement": "preprint",
+      "pdf": "",
+      "venue": "arXiv preprint",
+      "status": "preprint",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2611.29678",
+      "title": "Ref2Light: From One Image to Interactive Glasses-Free 3D Characters",
+      "authors": "Hanzhong Zhang, Haoyang Wang, Siyang Song",
+      "summary": "Animating character illustrations on light-field displays demands coherent binocular parallax, real-time pose articulation, and fine-grained expression control. However, existing 2D animation and 3D reconstruction pipelines cannot combine these with rapid character switching. We present Ref2Light, a feed-forward framework that maps a single A-pose illustration and continuous pose and expression controls to display-native light-field animation, without per-character 3D reconstruction, rigging, or test-time optimization. Our key insight is to decompose light-field synthesis into static identity, view-dependent parallax, and control-driven articulation. A shared encoder caches multi-scale identity features once per character for rapid switching. A conditional decoder then synthesizes ordered angular anchors from these features via backward texture transport and direct color synthesis. A global-local control scheme deforms the anchors with head-body controls and uses the updated correspondence fields to track facial regions across views for masked local facial refinement. Finally, calibrated differentiable subpixel interlacing converts the anchors into the native panel raster, enabling end-to-end native supervision without rendering all views at full resolution. On held-out VRoid identities, Ref2Light reduces head-body LPIPS by 20.1%-55.6% over 2D and 3D baselines and lowers non-target change MAE in mouth closure by 95.6%-96.5% versus monolithic decoding, while running at 34.0-40.1 FPS for 1440x2560 native rasters on a consumer GPU. Code and demo are in the Supplementary Material.",
+      "image": "images/uploads/0420e95f-340f-4397-96c7-748baa27ffb2.png",
+      "figureAlt": "Overview of the proposed Ref2Light."
+    },
+    {
       "title": "Beyond End-to-End Black Box Mapping: An Intentional Agent Framework for Cognitive-driven Facial Reaction Generation",
       "authors": "Hanzhong Zhang, Jindong Wang, Siyang Song",
       "year": 2026,
@@ -59,7 +72,7 @@
       "summary": "The Intentional Agent uses appraisal, emotional drives and an evolving inner thought flow to generate facial reactions during conversation. The work tests whether explicitly modelling these intermediate states helps produce more perceptually plausible reactions.",
       "status": "preprint",
       "date": "2026-09-28",
-      "image": "https://arxiv.org/html/2609.34419v1/figure_2.png",
+      "image": "images/uploads/3cc4271e-9338-437b-adab-ea12085ebdb1.png",
       "figureAlt": "Figure 1. Internal dynamics model of the Intentional Agent.",
       "placement": "preprint"
     },
@@ -90,7 +103,7 @@
       "date": "2026-03-24",
       "image": "images/thumbs/stance-outcomes.webp",
       "figureAlt": "Figure 1 redrawn from Table 3. Stance departure and low-trust shifts for four interventions.",
-      "placement": "preprint"
+      "placement": "other"
     },
     {
       "title": "Simulating Phenomenal Consciousness Using Generative Agents Based on Large Language Models",
